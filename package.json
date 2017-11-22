@@ -1,0 +1,22 @@
+{
+  "name": "trump-spellchecker",
+  "version": "1.0.0",
+  "description": "Real-time spellchecking our kindergartner-in-chief",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lampitosgames/trump-spellchecker.git"
+  },
+  "keywords": [
+    "npm"
+  ],
+  "author": "Daniel Timko (dantimko1@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lampitosgames/trump-spellchecker/issues"
+  },
+  "homepage": "https://github.com/lampitosgames/trump-spellchecker#readme"
+}
