@@ -3,10 +3,6 @@
   "version": "1.1.0",
   "description": "Real-time spellchecking our kindergartner-in-chief",
   "main": "index.js",
-  "scripts": {
-    "dev": "webpack-dev-server",
-    "build": "webpack"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lampitosgames/trump-spellchecker.git"
@@ -20,18 +16,35 @@
     "url": "https://github.com/lampitosgames/trump-spellchecker/issues"
   },
   "homepage": "https://github.com/lampitosgames/trump-spellchecker#readme",
+  "scripts": {
+    "start": "npm run build && node dist/app.js",
+    "dev-start": "node dist/app.js",
+    "build": "npm run build-babel && npm run build-assets && npm run build-webpack",
+    "build-babel": "babel server -d dist",
+    "build-webpack": "webpack --config ./webpack.config.js --progress --colors",
+    "build-assets": "cp -r app/assets dist && cp app/index.html dist"
+  },
   "dependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
+    "bootstrap": "^4.0.0-alpha.2",
+    "express": "^4.14.0",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "redux": "^3.6.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.6.5",
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
+    "babel-preset-react": "^6.16.0",
     "css-loader": "^0.28.7",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "file-loader": "^1.1.5",
-    "html-webpack-plugin": "^2.30.1",
-    "react": "^16.1.1",
-    "react-dom": "^16.1.1",
+    "node-sass": "^4.7.2",
+    "react-hot-loader": "^3.0.0-beta.5",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
     "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.4"
+    "webpack-dev-middleware": "^1.8.3",
+    "webpack-hot-middleware": "^2.12.2"
   }
 }
