@@ -8,7 +8,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'bundle.js',
-        publicPath: './dist'
+        publicPath: './dist/'
     },
     plugins: [],
     module: {
@@ -32,6 +32,10 @@ module.exports = {
                         loader: "sass-loader" // compiles Sass to CSS
                     }
                 ]
+            }, {
+                test: /\.(jpg|png|svg)$/,
+                loader: 'file-loader',
+                include: path.join(__dirname, 'app', 'assets')
             }
         ]
     }

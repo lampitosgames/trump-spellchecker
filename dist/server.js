@@ -7,12 +7,14 @@ module.exports = {
   app: function app() {
     var app = express();
     var indexPath = path.join(__dirname, 'index.html');
-    var publicPath = express.static(path.join(__dirname, '../dist'));
+    var publicPath = express.static(__dirname);
 
     app.use('/dist', publicPath);
     app.get('/', function (_, res) {
       res.sendFile(indexPath);
     });
+
+    console.log("test");
 
     return app;
   }

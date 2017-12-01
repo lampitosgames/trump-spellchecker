@@ -22,7 +22,7 @@
     "build": "npm run build-babel && npm run build-assets && npm run build-webpack",
     "build-babel": "babel server -d dist",
     "build-webpack": "webpack --config ./webpack.config.js --progress --colors",
-    "build-assets": "cp -r app/assets dist && cp app/index.html dist"
+    "build-assets": "cp app/index.html dist"
   },
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.2",
@@ -39,6 +39,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.16.0",
     "css-loader": "^0.28.7",
+    "file-loader": "^1.1.5",
     "node-sass": "^4.7.2",
     "react-hot-loader": "^3.0.0-beta.5",
     "sass-loader": "^6.0.6",

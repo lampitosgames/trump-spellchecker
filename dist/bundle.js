@@ -57,7 +57,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "./dist";
+/******/ 	__webpack_require__.p = "./dist/";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 81);
@@ -9611,6 +9611,10 @@ var _reactDom = __webpack_require__(99);
 
 __webpack_require__(185);
 
+var _download = __webpack_require__(190);
+
+var _download2 = _interopRequireDefault(_download);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9634,7 +9638,8 @@ var Hello = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
-        'Hello from react'
+        'Hello from react',
+        _react2.default.createElement('img', { src: _download2.default })
       );
     }
   }]);
@@ -22727,6 +22732,12 @@ module.exports = function (css) {
 	return fixedCss;
 };
 
+
+/***/ }),
+/* 190 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "611b8048354b6402382202a07fe73d23.jpg";
 
 /***/ })
 /******/ ]);
