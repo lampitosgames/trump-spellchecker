@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import {subscribeToTweets} from './api/api';
 import './App.css';
 
 class App extends Component {
-  state = { message: "test" }
+  state = {
+      message: "test",
+      io: undefined
+  }
 
   componentDidMount() {
     this.getHelloWorld();
+
+    subscribeToTweets();
   }
 
   getHelloWorld = () => {
