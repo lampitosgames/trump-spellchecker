@@ -16,7 +16,8 @@ router.use('/', express.static(path.join(__dirname, '..', 'client', 'build')));
 
 //test
 router.get('/api/helloworld', (req, res) => {
-    res.json({"hello": "world"});
+    console.log("a request was made");
+    res.json({message: "Hello world!"});
 });
 
 //Return the main HTML file when a request is made to the default path

@@ -46,9 +46,6 @@ typings/
 # Optional npm cache directory
 .npm
 
-# Built server files
-dist/
-
 # Optional eslint cache
 .eslintcache
 
