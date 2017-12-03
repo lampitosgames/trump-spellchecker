@@ -1,5 +1,3 @@
 {
-  "plugins": ["react-hot-loader/babel"],
-  "presets": ["env", "react"],
-  "ignore":[]
+  "presets": ["env"]
 }

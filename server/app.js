@@ -1,20 +1,23 @@
-const Server = require('./server.js')
-const port = (process.env.PORT || 8080)
-const app = Server.app()
+import express from 'express';
+import path from 'path';
+import http from 'http';
+// import socketIO from 'socket.io';
+import router from './router';
+//Select the port from an environment variable or default to 8000
+//This is needed for Heroku
+const port = (process.env.PORT || 5000)
 
-if (process.env.NODE_ENV !== 'production') {
-  const webpack = require('webpack')
-  const webpackDevMiddleware = require('webpack-dev-middleware')
-  const webpackHotMiddleware = require('webpack-hot-middleware')
-  const config = require('../webpack.config.js')
-  const compiler = webpack(config)
+//Express app
+let app = express();
+//HTTP servver
+let server = http.Server(app);
+//Socket server
+// let io = socketIO.listen(server);
 
-  app.use(webpackHotMiddleware(compiler))
-  app.use(webpackDevMiddleware(compiler, {
-    noInfo: true,
-    publicPath: config.output.publicPath
-  }))
-}
+//Hook in the app router
+app.use(router);
 
-app.listen(port)
-console.log(`Listening at http://localhost:${port}`)
+//Start the server listening on this port
+server.listen(port, () => {
+    console.log("Server listening on " + server.address().port);
+});
