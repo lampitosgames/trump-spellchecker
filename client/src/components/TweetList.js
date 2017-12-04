@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import Tweet from './Tweet';
+import Tweet from './Tweet.js';
 
 class TweetList extends Component {
     render() {

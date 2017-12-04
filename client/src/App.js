@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Counter from './components/Counter';
-import TweetList from './components/TweetList';
+import Counter from './components/Counter.js';
+import TweetList from './components/TweetList.js';
 
 class App extends Component {
   render() {
