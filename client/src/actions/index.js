@@ -13,6 +13,7 @@ export const decrementCounter = () => {
 }
 
 export const newTweet = (tweetData) => {
+    console.dir(tweetData);
     return {
         type: actionTypes.NEW_TWEET,
         id: tweetData.tweet.id,
