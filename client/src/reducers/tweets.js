@@ -29,6 +29,14 @@ const tweets = (state = initialState, action) => {
                     }
                 ]
             }
+        case actionTypes.NEW_TWEET_LIST:
+            return {
+                ...state,
+                tweets: [
+                    ...state.tweets,
+                    ...action.tweets
+                ]
+            }
         default:
             return state;
     }

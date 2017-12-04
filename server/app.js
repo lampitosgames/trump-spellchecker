@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').load();
 }
 
-import tweetListen from './twitter';
+import {listenForTweets, getRecentTweets, getFullTweet} from './twitter';
 
 //Select the port from an environment variable or default to 8000
 //This is needed for Heroku
@@ -24,49 +24,41 @@ let io = socketIO.listen(server);
 //Hook in the app router
 app.use(router);
 
+//Store recent tweets by a user
+let recentTweets = [];
+
 //On a new connection
 io.on('connection', (socket) => {
-    console.dir("connected!");
-    // //Bind createNewPlayer for when the client requests a player
-    // socket.on('createNewPlayer', () => {
-    //     //Add a new player to the game and store the ID on this socket
-    //     socket.playerID = game.addNewPlayer(socket);
-    //
-    //     //Listen to player updates from the client
-    //     socket.on('updatePlayer', (data) => {
-    //         game.updatePlayerFromClient(socket, data);
-    //     });
-    //
-    //     //Listen for new attackers
-    //     socket.on('tagPlayer', (id) => {
-    //         game.declareNewAttacker(id);
-    //     });
-    //
-    //     //Only bind disconnect if the player was created in the first place
-    //     //Disconnect the player
-    //     socket.on('disconnect', () => {
-    //         game.disconnectPlayer(socket.playerID);
-    //     });
-    // });
+    console.log("connected");
+    socket.emit('recentTweets', recentTweets);
 });
 
 //Start the server listening on this port
 server.listen(port, () => {
     console.log("Server listening on " + server.address().port);
 
-    let listenToUser = 'lampitosgames';
+    let listenToUser = 'realDonaldTrump';
 
-    tweetListen(listenToUser).then((tweetStream) => {
+    getRecentTweets(listenToUser).then((oldTweets) => {
+        if (oldTweets == null) {
+            return;
+        }
+        recentTweets = recentTweets.concat(oldTweets);
+    }).catch((err) => console.log(err));
+
+    listenForTweets(listenToUser).then((tweetStream) => {
         tweetStream.on('data', (event) => {
             if (event.user.screen_name !== listenToUser) {
                 return;
             }
-            io.emit('newTweet', event);
-            console.log(event);
+            getFullTweet(event.id_str).then((tweet) => {
+                recentTweets.push(tweet);
+                io.emit('newTweet', tweet);
+            }).catch((err) => console.error(err));
         });
 
-        tweetStream.on('error', (error) => {
-            console.log(error);
+        tweetStream.on('error', (err) => {
+            console.error(err);
         });
     }).catch((err) => console.error(err));
 });
