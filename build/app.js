@@ -22,6 +22,8 @@ var _router2 = _interopRequireDefault(_router);
 
 var _twitter = require('./twitter');
 
+var _languageTool = require('./languageTool');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 if (process.env.NODE_ENV !== 'production') {
@@ -55,13 +57,22 @@ io.on('connection', function (socket) {
 server.listen(port, function () {
     console.log("Server listening on " + server.address().port);
 
-    var listenToUser = 'realDonaldTrump';
+    var listenToUser = 'lampitosgames';
 
-    (0, _twitter.getRecentTweets)(listenToUser).then(function (oldTweets) {
-        if (oldTweets == null) {
+    (0, _twitter.getRecentTweets)(listenToUser).then(function (oldTweetData) {
+        if (oldTweetData == null) {
             return;
         }
-        recentTweets = recentTweets.concat(oldTweets);
+        oldTweetData.forEach(function (tweet) {
+            (0, _languageTool.spellcheckText)(tweet.full_text ? tweet.full_text : tweet.text).then(function (checked) {
+                recentTweets.push({
+                    tweet: tweet,
+                    checked: JSON.parse(checked)
+                });
+            }).catch(function (err) {
+                return console.error(error);
+            });
+        });
     }).catch(function (err) {
         return console.log(err);
     });
@@ -71,9 +82,19 @@ server.listen(port, function () {
             if (event.user.screen_name !== listenToUser) {
                 return;
             }
-            (0, _twitter.getFullTweet)(event.id_str).then(function (tweet) {
-                recentTweets.push(tweet);
-                io.emit('newTweet', tweet);
+
+            (0, _twitter.getFullTweet)(event.id_str).then(function (tweetData) {
+
+                (0, _languageTool.spellcheckText)(tweetData.full_text ? tweetData.full_text : tweetData.text).then(function (checkedJSON) {
+                    var tweet = {
+                        tweet: tweetData,
+                        checked: JSON.parse(checkedJSON)
+                    };
+                    recentTweets.push(tweet);
+                    io.emit('newTweet', tweet);
+                }).catch(function (err) {
+                    return console.error(err);
+                });
             }).catch(function (err) {
                 return console.error(err);
             });
