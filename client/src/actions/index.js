@@ -12,26 +12,29 @@ export const decrementCounter = () => {
     }
 }
 
-export const newTweet = (tweet) => {
+export const newTweet = (tweetData) => {
     return {
         type: actionTypes.NEW_TWEET,
-        id: tweet.id,
-        text: tweet.text ? tweet.text : tweet.full_text,
-        data: tweet
+        id: tweetData.tweet.id,
+        text: tweetData.tweet.full_text ? tweetData.tweet.full_text : tweetData.tweet.text,
+        checked: tweetData.checked,
+        data: tweetData
     };
 }
 
 export const multipleNewTweets = (tweets) => {
+    console.dir(tweets);
     let returnData = {
         type: actionTypes.NEW_TWEET_LIST,
         tweets: []
     };
 
-    tweets.forEach((tweet) => {
+    tweets.forEach((tweetData) => {
         returnData.tweets.push({
-            id: tweet.id,
-            text: tweet.text ? tweet.text : tweet.full_text,
-            data: tweet
+            id: tweetData.tweet.id,
+            text: tweetData.tweet.full_text ? tweetData.tweet.full_text : tweetData.tweet.text,
+            checked: tweetData.checked,
+            data: tweetData
         });
     });
 

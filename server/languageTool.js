@@ -48,3 +48,9 @@ export const testRequest = () => {
         console.dir(JSON.parse(data));
     }).catch((err) => console.log(err));
 }
+
+export const spellcheckText = (_text) => {
+    const postData = createPostData({text: _text, language: "en-US"});
+    const options = createPostOptions('www.languagetool.org', '/api/v2/check', postData);
+    return postRequest(postData, options);
+}

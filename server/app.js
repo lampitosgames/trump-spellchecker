@@ -9,7 +9,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 import {listenForTweets, getRecentTweets, getFullTweet} from './twitter';
-import { testRequest } from './languageTool';
+import {spellcheckText} from './languageTool';
 
 //Select the port from an environment variable or default to 8000
 //This is needed for Heroku
@@ -40,28 +40,44 @@ server.listen(port, () => {
 
     let listenToUser = 'lampitosgames';
 
-    testRequest();
-
-    getRecentTweets(listenToUser).then((oldTweets) => {
-        if (oldTweets == null) {
+    getRecentTweets(listenToUser).then((oldTweetData) => {
+        if (oldTweetData == null) {
             return;
         }
-        recentTweets = recentTweets.concat(oldTweets);
+        oldTweetData.forEach((tweet) => {
+            spellcheckText(tweet.full_text ? tweet.full_text : tweet.text).then((checked) => {
+                recentTweets.push({
+                    tweet: tweet,
+                    checked: JSON.parse(checked)
+                });
+            }).catch((err) => console.error(error));
+        });
     }).catch((err) => console.log(err));
 
-    // listenForTweets(listenToUser).then((tweetStream) => {
-    //     tweetStream.on('data', (event) => {
-    //         if (event.user.screen_name !== listenToUser) {
-    //             return;
-    //         }
-    //         getFullTweet(event.id_str).then((tweet) => {
-    //             recentTweets.push(tweet);
-    //             io.emit('newTweet', tweet);
-    //         }).catch((err) => console.error(err));
-    //     });
-    //
-    //     tweetStream.on('error', (err) => {
-    //         console.error(err);
-    //     });
-    // }).catch((err) => console.error(err));
+    listenForTweets(listenToUser).then((tweetStream) => {
+        tweetStream.on('data', (event) => {
+            if (event.user.screen_name !== listenToUser) {
+                return;
+            }
+
+            getFullTweet(event.id_str).then((tweetData) => {
+
+                spellcheckText(tweetData.full_text
+                    ? tweetData.full_text
+                    : tweetData.text).then((checkedJSON) => {
+                    let tweet = {
+                        tweet: tweetData,
+                        checked: JSON.parse(checkedJSON)
+                    }
+                    recentTweets.push(tweet);
+                    io.emit('newTweet', tweet);
+                }).catch((err) => console.error(err))
+
+            }).catch((err) => console.error(err));
+        });
+
+        tweetStream.on('error', (err) => {
+            console.error(err);
+        });
+    }).catch((err) => console.error(err));
 });
