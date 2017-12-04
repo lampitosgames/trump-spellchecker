@@ -37,7 +37,7 @@ io.on('connection', (socket) => {
 server.listen(port, () => {
     console.log("Server listening on " + server.address().port);
 
-    let listenToUser = 'realDonaldTrump';
+    let listenToUser = 'lampitosgames';
 
     getRecentTweets(listenToUser).then((oldTweets) => {
         if (oldTweets == null) {
