@@ -1,4 +1,5 @@
 export default {
     INCREMENT: 'INCREMENT',
-    DECREMENT: 'DECREMENT'
+    DECREMENT: 'DECREMENT',
+    NEW_TWEET: 'NEW_TWEET'
 }

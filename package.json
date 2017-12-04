@@ -18,11 +18,11 @@
   "homepage": "https://github.com/lampitosgames/trump-spellchecker#readme",
   "scripts": {
     "dev": "concurrently \"npm run nodemon\" \"cd client && npm start\"",
-    "start": "node ./dist/app.js",
+    "start": "node ./build/app.js",
     "deploy": "npm run build && git add . && git commit -m'added files for heroku build' && git push heroku master && git push master",
     "nodemon": "nodemon --watch ./server ./server/app.js --exec babel-node",
     "build": "npm run build-server && npm run build-client",
-    "build-server": "rm -rf dist && mkdir dist && babel -d ./dist ./server",
+    "build-server": "rm -rf build && mkdir build && babel -d ./build ./server",
     "build-client": "cd client && rm -rf build && npm run build",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },

@@ -11,3 +11,12 @@ export const decrementCounter = () => {
         type: actionTypes.DECREMENT
     }
 }
+
+export const newTweet = (tweet) => {
+    return {
+        type: actionTypes.NEW_TWEET,
+        id: tweet.id,
+        text: tweet.text,
+        data: tweet
+    };
+}
