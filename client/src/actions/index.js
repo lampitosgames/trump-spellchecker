@@ -24,7 +24,14 @@ export const newTweet = (tweetData) => {
 }
 
 export const multipleNewTweets = (tweets) => {
+    tweets = tweets.sort((a, b) => {
+        let dateA = Date.parse(a.tweet.created_at);
+        let dateB = Date.parse(b.tweet.created_at);
+        return (dateA < dateB ? 1 : -1);
+    });
+
     console.dir(tweets);
+
     let returnData = {
         type: actionTypes.NEW_TWEET_LIST,
         tweets: []
