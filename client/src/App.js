@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import {subscribeToTweets} from './api/api';
-import './App.css';
+// import {subscribeToTweets} from './api/api';
+
+import Counter from './components/counter';
 
 class App extends Component {
-  state = {
-      message: "test",
-      io: undefined
-  }
-
   componentDidMount() {
-    subscribeToTweets();
+    // subscribeToTweets();
   }
 
   getHelloWorld = () => {
@@ -23,7 +19,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-          {this.state.message}
+          <Counter name="test"/>
       </div>
     );
   }
