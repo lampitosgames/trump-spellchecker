@@ -22,8 +22,6 @@ var _router2 = _interopRequireDefault(_router);
 
 var _twitter = require('./twitter');
 
-var _twitter2 = _interopRequireDefault(_twitter);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 if (process.env.NODE_ENV !== 'production') {
@@ -44,49 +42,45 @@ var io = _socket2.default.listen(server);
 //Hook in the app router
 app.use(_router2.default);
 
+//Store recent tweets by a user
+var recentTweets = [];
+
 //On a new connection
 io.on('connection', function (socket) {
-    console.dir("connected!");
-    // //Bind createNewPlayer for when the client requests a player
-    // socket.on('createNewPlayer', () => {
-    //     //Add a new player to the game and store the ID on this socket
-    //     socket.playerID = game.addNewPlayer(socket);
-    //
-    //     //Listen to player updates from the client
-    //     socket.on('updatePlayer', (data) => {
-    //         game.updatePlayerFromClient(socket, data);
-    //     });
-    //
-    //     //Listen for new attackers
-    //     socket.on('tagPlayer', (id) => {
-    //         game.declareNewAttacker(id);
-    //     });
-    //
-    //     //Only bind disconnect if the player was created in the first place
-    //     //Disconnect the player
-    //     socket.on('disconnect', () => {
-    //         game.disconnectPlayer(socket.playerID);
-    //     });
-    // });
+    console.log("connected");
+    socket.emit('recentTweets', recentTweets);
 });
 
 //Start the server listening on this port
 server.listen(port, function () {
     console.log("Server listening on " + server.address().port);
 
-    var listenToUser = 'lampitosgames';
+    var listenToUser = 'realDonaldTrump';
 
-    (0, _twitter2.default)(listenToUser).then(function (tweetStream) {
+    (0, _twitter.getRecentTweets)(listenToUser).then(function (oldTweets) {
+        if (oldTweets == null) {
+            return;
+        }
+        recentTweets = recentTweets.concat(oldTweets);
+    }).catch(function (err) {
+        return console.log(err);
+    });
+
+    (0, _twitter.listenForTweets)(listenToUser).then(function (tweetStream) {
         tweetStream.on('data', function (event) {
             if (event.user.screen_name !== listenToUser) {
                 return;
             }
-            io.emit('newTweet', event);
-            console.log(event);
+            (0, _twitter.getFullTweet)(event.id_str).then(function (tweet) {
+                recentTweets.push(tweet);
+                io.emit('newTweet', tweet);
+            }).catch(function (err) {
+                return console.error(err);
+            });
         });
 
-        tweetStream.on('error', function (error) {
-            console.log(error);
+        tweetStream.on('error', function (err) {
+            console.error(err);
         });
     }).catch(function (err) {
         return console.error(err);
