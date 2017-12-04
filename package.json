@@ -17,10 +17,13 @@
   },
   "homepage": "https://github.com/lampitosgames/trump-spellchecker#readme",
   "scripts": {
-    "nodemon": "nodemon --watch ./server ./server/app.js --exec babel-node",
-    "deploy": "npm run build-server && git add . && git commit -m'added files for heroku build' && git push heroku master && git push master",
-    "build-server": "rm -rf dist && mkdir dist && babel -d ./dist ./server",
+    "dev": "concurrently \"npm run nodemon\" \"cd client && npm start\"",
     "start": "node ./dist/app.js",
+    "deploy": "npm run build && git add . && git commit -m'added files for heroku build' && git push heroku master && git push master",
+    "nodemon": "nodemon --watch ./server ./server/app.js --exec babel-node",
+    "build": "npm run build-server && npm run build-client",
+    "build-server": "rm -rf dist && mkdir dist && babel -d ./dist ./server",
+    "build-client": "cd client && rm -rf build && npm run build",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "dependencies": {
@@ -33,6 +36,7 @@
     "babel-cli": "^6.6.5",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.16.0",
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.12.1",
+    "concurrently": "^3.5.1"
   }
 }

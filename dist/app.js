@@ -37,7 +37,7 @@ var port = process.env.PORT || 5000;
 //Express app
 var app = (0, _express2.default)();
 //HTTP servver
-var server = _http2.default.Server(app);
+var server = _http2.default.createServer(app);
 //Socket server
 var io = _socket2.default.listen(server);
 

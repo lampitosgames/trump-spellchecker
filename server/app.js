@@ -17,7 +17,7 @@ const port = (process.env.PORT || 5000)
 //Express app
 let app = express();
 //HTTP servver
-let server = http.Server(app);
+let server = http.createServer(app);
 //Socket server
 let io = socketIO.listen(server);
 

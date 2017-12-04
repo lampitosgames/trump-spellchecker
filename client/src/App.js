@@ -9,8 +9,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getHelloWorld();
-
     subscribeToTweets();
   }
 

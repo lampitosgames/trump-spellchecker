@@ -31,12 +31,6 @@ router.use(_middleware2.default);
 //Serve static files for the client
 router.use('/', _express2.default.static(_path2.default.join(__dirname, '..', 'client', 'build')));
 
-//test
-router.get('/api/helloworld', function (req, res) {
-    console.log("a request was made");
-    res.json({ message: "Hello world!" });
-});
-
 //Return the main HTML file when a request is made to the default path
 router.get('/', function (req, res) {
     res.sendFile(_path2.default.join(__dirname, '..', 'client', 'index.html'));

@@ -1,5 +1,5 @@
-import openSocket from 'socket.io-client';
-const socket = openSocket('http://localhost:3000');
+import io from 'socket.io-client';
+const socket = io();
 
 function subscribeToTweets() {
     socket.on('newTweet', (tweet) => {
