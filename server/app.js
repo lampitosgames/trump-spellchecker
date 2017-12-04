@@ -9,6 +9,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 import {listenForTweets, getRecentTweets, getFullTweet} from './twitter';
+import { testRequest } from './languageTool';
 
 //Select the port from an environment variable or default to 8000
 //This is needed for Heroku
@@ -39,6 +40,8 @@ server.listen(port, () => {
 
     let listenToUser = 'lampitosgames';
 
+    testRequest();
+
     getRecentTweets(listenToUser).then((oldTweets) => {
         if (oldTweets == null) {
             return;
@@ -46,19 +49,19 @@ server.listen(port, () => {
         recentTweets = recentTweets.concat(oldTweets);
     }).catch((err) => console.log(err));
 
-    listenForTweets(listenToUser).then((tweetStream) => {
-        tweetStream.on('data', (event) => {
-            if (event.user.screen_name !== listenToUser) {
-                return;
-            }
-            getFullTweet(event.id_str).then((tweet) => {
-                recentTweets.push(tweet);
-                io.emit('newTweet', tweet);
-            }).catch((err) => console.error(err));
-        });
-
-        tweetStream.on('error', (err) => {
-            console.error(err);
-        });
-    }).catch((err) => console.error(err));
+    // listenForTweets(listenToUser).then((tweetStream) => {
+    //     tweetStream.on('data', (event) => {
+    //         if (event.user.screen_name !== listenToUser) {
+    //             return;
+    //         }
+    //         getFullTweet(event.id_str).then((tweet) => {
+    //             recentTweets.push(tweet);
+    //             io.emit('newTweet', tweet);
+    //         }).catch((err) => console.error(err));
+    //     });
+    //
+    //     tweetStream.on('error', (err) => {
+    //         console.error(err);
+    //     });
+    // }).catch((err) => console.error(err));
 });
