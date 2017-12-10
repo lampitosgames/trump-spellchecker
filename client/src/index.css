@@ -18,7 +18,9 @@ This project is for educational purposes only
 body {
   margin: 0;
   padding: 0;
-  /*background-color: #e6ecf1;*/
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
   background-image: url("./assets/trumpBackground.jpg");
   background-position: bottom;
   background-attachment: fixed;
@@ -179,6 +181,6 @@ a {
 
             .tweetFooter {
                 display: block;
-                width: 500px;
+                /*width: 500px;*/
                 height: 20px;
             }
