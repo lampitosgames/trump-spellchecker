@@ -1,0 +1,309 @@
+{
+    "id": 939686814713040900,
+    "timestamp": "Sun Dec 10 02:42:49 +0000 2017",
+    "text": "use too see an few of of the problems that LanguageTool can detecd. What does @lampitosgames thinks of #grammar checkers? Please not that they are not perfect. Style issues get a blue marker: It's 5 P.M. in the afternoon. LanguageTool 3.8 was released on Thursday, 27 June 2017.",
+    "originalTwitterText": "use too see an few of of the problems that LanguageTool can detecd. What does @lampitosgames thinks of #grammar checkers? Please not that they are not perfect. Style issues get a blue marker: It's 5 P.M. in the afternoon. LanguageTool 3.8 was released on Thursday, 27 June 2017. https://t.co/mzhNsEgY0f",
+    "baseTextIndices": [0, 278],
+    "userID": 733916972,
+    "userRealName": "Daniel Timko",
+    "userScreenName": "lampitosgames",
+    "userImageLink": "https://pbs.twimg.com/profile_images/525309063286886400/4imQ1Zys_normal.jpeg",
+    "favorites": 0,
+    "retweets": 0,
+    "media": [{
+        "type": "photo",
+        "offset": 279,
+        "length": 23,
+        "twitterURL": "https://t.co/mzhNsEgY0f",
+        "picURL": "https://pbs.twimg.com/media/DQpwJ_DW0AUKgvO.jpg",
+        "sizes": {
+            "thumb": {
+                "w": 150,
+                "h": 150,
+                "resize": "crop"
+            },
+            "medium": {
+                "w": 802,
+                "h": 1069,
+                "resize": "fit"
+            },
+            "large": {
+                "w": 802,
+                "h": 1069,
+                "resize": "fit"
+            },
+            "small": {
+                "w": 510,
+                "h": 680,
+                "resize": "fit"
+            }
+        }
+    }, {
+        "type": "photo",
+        "offset": 279,
+        "length": 23,
+        "twitterURL": "https://t.co/mzhNsEgY0f",
+        "picURL": "https://pbs.twimg.com/media/DQpwJ_BW4AARMht.jpg",
+        "sizes": {
+            "thumb": {
+                "w": 150,
+                "h": 150,
+                "resize": "crop"
+            },
+            "medium": {
+                "w": 613,
+                "h": 1020,
+                "resize": "fit"
+            },
+            "large": {
+                "w": 613,
+                "h": 1020,
+                "resize": "fit"
+            },
+            "small": {
+                "w": 409,
+                "h": 680,
+                "resize": "fit"
+            }
+        }
+    }],
+    "fullCheckedText": [{
+        "type": "GRAMMAR_MISTAKE",
+        "offset": 0,
+        "length": 3,
+        "message": "",
+        "fullMessage": "This sentence does not start with an uppercase letter",
+        "replacements": ["Use"],
+        "issueType": "typographical",
+        "isCorrection": true,
+        "text": "use",
+        "isLink": false,
+        "nextIndex": 3,
+        "prevIndex": 0
+    }, {
+        "type": "PLAIN_TEXT",
+        "offset": 3,
+        "length": 1,
+        "text": " ",
+        "isLink": false,
+        "isCorrection": false,
+        "nextIndex": 4,
+        "prevIndex": 3
+    }, {
+        "type": "GRAMMAR_MISTAKE",
+        "offset": 4,
+        "length": 7,
+        "message": "Possible typo",
+        "fullMessage": "Did you mean \"to see\"?",
+        "replacements": ["to see"],
+        "issueType": "misspelling",
+        "isCorrection": true,
+        "text": "too see",
+        "isLink": false,
+        "nextIndex": 11,
+        "prevIndex": 4
+    }, {
+        "type": "PLAIN_TEXT",
+        "offset": 11,
+        "length": 1,
+        "text": " ",
+        "isLink": false,
+        "isCorrection": false,
+        "nextIndex": 12,
+        "prevIndex": 11
+    }, {
+        "type": "GRAMMAR_MISTAKE",
+        "offset": 12,
+        "length": 2,
+        "message": "Wrong article",
+        "fullMessage": "Use \"a\" instead of 'an' if the following word doesn't start with a vowel sound, e.g. 'a sentence', 'a university'",
+        "replacements": ["a"],
+        "issueType": "misspelling",
+        "isCorrection": true,
+        "text": "an",
+        "isLink": false,
+        "nextIndex": 14,
+        "prevIndex": 12
+    }, {
+        "type": "PLAIN_TEXT",
+        "offset": 14,
+        "length": 5,
+        "text": " few ",
+        "isLink": false,
+        "isCorrection": false,
+        "nextIndex": 19,
+        "prevIndex": 14
+    }, {
+        "type": "GRAMMAR_MISTAKE",
+        "offset": 19,
+        "length": 5,
+        "message": "Word repetition",
+        "fullMessage": "Possible typo: you repeated a word",
+        "replacements": ["of"],
+        "issueType": "duplication",
+        "isCorrection": true,
+        "text": "of of",
+        "isLink": false,
+        "nextIndex": 24,
+        "prevIndex": 19
+    }, {
+        "type": "PLAIN_TEXT",
+        "offset": 24,
+        "length": 36,
+        "text": " the problems that LanguageTool can ",
+        "isLink": false,
+        "isCorrection": false,
+        "nextIndex": 60,
+        "prevIndex": 24
+    }, {
+        "type": "SPELLING_MISTAKE",
+        "offset": 60,
+        "length": 6,
+        "message": "Spelling mistake",
+        "fullMessage": "Possible spelling mistake found",
+        "replacements": ["detect"],
+        "issueType": "misspelling",
+        "isCorrection": true,
+        "text": "detecd",
+        "isLink": false,
+        "nextIndex": 66,
+        "prevIndex": 60
+    }, {
+        "type": "PLAIN_TEXT",
+        "offset": 66,
+        "length": 12,
+        "text": ". What does ",
+        "isLink": false,
+        "isCorrection": false,
+        "nextIndex": 78,
+        "prevIndex": 66
+    }, {
+        "type": "AT_USER",
+        "offset": 78,
+        "length": 14,
+        "screenName": "lampitosgames",
+        "realName": "Daniel Timko",
+        "url": "https://twitter.com/lampitosgames",
+        "text": "@lampitosgames",
+        "isLink": true,
+        "isCorrection": false,
+        "nextIndex": 92,
+        "prevIndex": 78
+    }, {
+        "type": "PLAIN_TEXT",
+        "offset": 92,
+        "length": 1,
+        "text": " ",
+        "isLink": false,
+        "isCorrection": false,
+        "nextIndex": 93,
+        "prevIndex": 92
+    }, {
+        "type": "GRAMMAR_MISTAKE",
+        "offset": 93,
+        "length": 6,
+        "message": "",
+        "fullMessage": "Did you mean \"think\"? As 'do' is already inflected, the verb cannot also be inflected.",
+        "replacements": ["think"],
+        "issueType": "grammar",
+        "isCorrection": true,
+        "text": "thinks",
+        "isLink": false,
+        "nextIndex": 99,
+        "prevIndex": 93
+    }, {
+        "type": "PLAIN_TEXT",
+        "offset": 99,
+        "length": 4,
+        "text": " of ",
+        "isLink": false,
+        "isCorrection": false,
+        "nextIndex": 103,
+        "prevIndex": 99
+    }, {
+        "type": "HASHTAG",
+        "offset": 103,
+        "length": 8,
+        "url": "https://twitter.com/hashtag/grammar",
+        "text": "#grammar",
+        "isLink": true,
+        "isCorrection": false,
+        "nextIndex": 111,
+        "prevIndex": 103
+    }, {
+        "type": "PLAIN_TEXT",
+        "offset": 111,
+        "length": 18,
+        "text": " checkers? Please ",
+        "isLink": false,
+        "isCorrection": false,
+        "nextIndex": 129,
+        "prevIndex": 111
+    }, {
+        "type": "GRAMMAR_MISTAKE",
+        "offset": 129,
+        "length": 3,
+        "message": "Possible typo",
+        "fullMessage": "Did you mean \"note\"?",
+        "replacements": ["note"],
+        "issueType": "misspelling",
+        "isCorrection": true,
+        "text": "not",
+        "isLink": false,
+        "nextIndex": 132,
+        "prevIndex": 129
+    }, {
+        "type": "PLAIN_TEXT",
+        "offset": 132,
+        "length": 67,
+        "text": " that they are not perfect. Style issues get a blue marker: It's 5 ",
+        "isLink": false,
+        "isCorrection": false,
+        "nextIndex": 199,
+        "prevIndex": 132
+    }, {
+        "type": "STYLE_MISTAKE",
+        "offset": 199,
+        "length": 22,
+        "message": "Redundant phrase",
+        "fullMessage": "Consider using \"P.M.\"",
+        "replacements": ["P.M."],
+        "issueType": "style",
+        "isCorrection": true,
+        "text": "P.M. in the afternoon.",
+        "isLink": false,
+        "nextIndex": 221,
+        "prevIndex": 199
+    }, {
+        "type": "PLAIN_TEXT",
+        "offset": 221,
+        "length": 34,
+        "text": " LanguageTool 3.8 was released on ",
+        "isLink": false,
+        "isCorrection": false,
+        "nextIndex": 255,
+        "prevIndex": 221
+    }, {
+        "type": "GRAMMAR_MISTAKE",
+        "offset": 255,
+        "length": 22,
+        "message": "",
+        "fullMessage": "The date 27 June 2017 is not a Thursday, but a Tuesday.",
+        "replacements": [],
+        "issueType": "inconsistency",
+        "isCorrection": true,
+        "text": "Thursday, 27 June 2017",
+        "isLink": false,
+        "nextIndex": 277,
+        "prevIndex": 255
+    }, {
+        "type": "PLAIN_TEXT",
+        "offset": 277,
+        "length": 1,
+        "text": ".",
+        "isLink": false,
+        "isCorrection": false,
+        "nextIndex": 278,
+        "prevIndex": 277
+    }]
+}

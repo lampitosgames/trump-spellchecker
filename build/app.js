@@ -20,6 +20,10 @@ var _router = require('./router');
 
 var _router2 = _interopRequireDefault(_router);
 
+var _tweetObject = require('./tweetObject');
+
+var _tweetObject2 = _interopRequireDefault(_tweetObject);
+
 var _twitter = require('./twitter');
 
 var _languageTool = require('./languageTool');
@@ -50,7 +54,9 @@ var recentTweets = [];
 //On a new connection
 io.on('connection', function (socket) {
     console.log("connected");
-    socket.emit('recentTweets', recentTweets);
+    socket.emit('recentTweets', recentTweets.map(function (tweet) {
+        return tweet.getData();
+    }));
 });
 
 //Start the server listening on this port
@@ -58,17 +64,18 @@ server.listen(port, function () {
     console.log("Server listening on " + server.address().port);
 
     var listenToUser = 'realDonaldTrump';
+    // let listenToUser = 'lampitosgames';
 
     (0, _twitter.getRecentTweets)(listenToUser).then(function (oldTweetData) {
         if (oldTweetData == null) {
             return;
         }
-        oldTweetData.forEach(function (tweet) {
-            (0, _languageTool.spellcheckText)(tweet.full_text ? tweet.full_text : tweet.text).then(function (checked) {
-                recentTweets.push({
-                    tweet: tweet,
-                    checked: JSON.parse(checked)
-                });
+
+        oldTweetData.forEach(function (tweetData) {
+            var thisTweet = new _tweetObject2.default(tweetData);
+            (0, _languageTool.spellcheckText)(thisTweet.text).then(function (checked) {
+                thisTweet.addCheckData(JSON.parse(checked)).build();
+                recentTweets.push(thisTweet);
             }).catch(function (err) {
                 return console.error(error);
             });
@@ -84,14 +91,12 @@ server.listen(port, function () {
             }
 
             (0, _twitter.getFullTweet)(event.id_str).then(function (tweetData) {
+                var thisTweet = new _tweetObject2.default(tweetData);
 
-                (0, _languageTool.spellcheckText)(tweetData.full_text ? tweetData.full_text : tweetData.text).then(function (checkedJSON) {
-                    var tweet = {
-                        tweet: tweetData,
-                        checked: JSON.parse(checkedJSON)
-                    };
-                    recentTweets.push(tweet);
-                    io.emit('newTweet', tweet);
+                (0, _languageTool.spellcheckText)(thisTweet.text).then(function (checked) {
+                    thisTweet.addCheckData(JSON.parse(checked)).build();
+                    recentTweets.push(thisTweet);
+                    io.emit('newTweet', thisTweet.getData());
                 }).catch(function (err) {
                     return console.error(err);
                 });
