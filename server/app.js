@@ -8,6 +8,7 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').load();
 }
 
+import Tweet from './tweetObject';
 import {listenForTweets, getRecentTweets, getFullTweet} from './twitter';
 import {spellcheckText} from './languageTool';
 
@@ -31,25 +32,26 @@ let recentTweets = [];
 //On a new connection
 io.on('connection', (socket) => {
     console.log("connected");
-    socket.emit('recentTweets', recentTweets);
+    socket.emit('recentTweets', recentTweets.map(tweet => tweet.getData()));
 });
 
 //Start the server listening on this port
 server.listen(port, () => {
     console.log("Server listening on " + server.address().port);
 
-    let listenToUser = 'lampitosgames';
+    let listenToUser = 'realDonaldTrump';
+    // let listenToUser = 'lampitosgames';
 
     getRecentTweets(listenToUser).then((oldTweetData) => {
         if (oldTweetData == null) {
             return;
         }
-        oldTweetData.forEach((tweet) => {
-            spellcheckText(tweet.full_text ? tweet.full_text : tweet.text).then((checked) => {
-                recentTweets.push({
-                    tweet: tweet,
-                    checked: JSON.parse(checked)
-                });
+
+        oldTweetData.forEach((tweetData) => {
+            let thisTweet = new Tweet(tweetData);
+            spellcheckText(thisTweet.text).then((checked) => {
+                thisTweet.addCheckData(JSON.parse(checked)).build();
+                recentTweets.push(thisTweet);
             }).catch((err) => console.error(error));
         });
     }).catch((err) => console.log(err));
@@ -61,16 +63,12 @@ server.listen(port, () => {
             }
 
             getFullTweet(event.id_str).then((tweetData) => {
+                let thisTweet = new Tweet(tweetData);
 
-                spellcheckText(tweetData.full_text
-                    ? tweetData.full_text
-                    : tweetData.text).then((checkedJSON) => {
-                    let tweet = {
-                        tweet: tweetData,
-                        checked: JSON.parse(checkedJSON)
-                    }
-                    recentTweets.push(tweet);
-                    io.emit('newTweet', tweet);
+                spellcheckText(thisTweet.text).then((checked) => {
+                    thisTweet.addCheckData(JSON.parse(checked)).build();
+                    recentTweets.push(thisTweet);
+                    io.emit('newTweet', thisTweet.getData());
                 }).catch((err) => console.error(err))
 
             }).catch((err) => console.error(err));

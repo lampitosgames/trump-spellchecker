@@ -5,8 +5,12 @@ import Tweet from './Tweet.js';
 
 class TweetList extends Component {
     render() {
-        let renderTweets = this.props.tweets.map(tweet =>
-            <Tweet key={tweet.id} text={tweet.text}/>
+        let renderTweets = this.props.tweets.sort((a, b) => {
+            let dateA = Date.parse(a.timestamp);
+            let dateB = Date.parse(b.timestamp);
+            return (dateA < dateB ? 1 : -1);
+        }).map(tweet =>
+            <Tweet key={tweet.id} tweetData={tweet}/>
         );
         return (
             <div>

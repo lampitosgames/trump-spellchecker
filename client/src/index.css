@@ -3,3 +3,16 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.tweet {
+    white-space: pre-wrap;
+}
+.grammarText {
+    background-color: yellow;
+}
+.styleText {
+    background-color: lightblue;
+}
+.spellingText {
+    background-color: pink;
+}

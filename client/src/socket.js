@@ -6,6 +6,7 @@ export default (store) => {
 
     socket.on('newTweet', (tweet) => {
         console.log("Got new tweet");
+        console.dir(tweet);
         store.dispatch(newTweet(tweet));
     });
 

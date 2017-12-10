@@ -2,6 +2,7 @@ import actionTypes from '../actions/actionTypes';
 
 const initialState = {
     count: 0,
+    totalErrors: 0,
     tweets: []
 };
 
@@ -22,18 +23,13 @@ const tweets = (state = initialState, action) => {
                 ...state,
                 tweets: [
                     ...state.tweets,
-                    {
-                        text: action.text,
-                        id: action.id,
-                        data: action.data
-                    }
+                    action.data
                 ]
             }
         case actionTypes.NEW_TWEET_LIST:
             return {
                 ...state,
                 tweets: [
-                    ...state.tweets,
                     ...action.tweets
                 ]
             }
