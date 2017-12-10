@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
+import moment from 'moment';
+
 import PlainText from './tweetComponents/plainText';
 import TwitterLink from './tweetComponents/twitterLink';
 import GrammarText from './tweetComponents/grammarText';
 
 class Tweet extends Component {
+
     render() {
         let uniqueID = 0;
         let renderedString = this.props.tweetData.fullCheckedText.map((fragment) => {
@@ -18,9 +21,23 @@ class Tweet extends Component {
             return <PlainText key={uniqueID++} fragment={fragment} />;
         });
         return (
-            <p className={"tweet"}>
-                {renderedString}
-            </p>
+            <div className={"tweetWrapper tweetText"}>
+                <div className={"tweetOuterContent"}>
+                    <div className={"tweetContent"}>
+                        <div className={"tweetHeader"}>
+                            <a className={"accountGroup"} href={"https://twitter.com/" + this.props.tweetData.userScreenName} target="_blank">
+                                <img src={this.props.tweetData.userImageLink} className={"accountPicture"} />
+                                <span className={"accountName"}>{this.props.tweetData.userRealName}</span>
+                                <span className={"accountUsername"}>{"@" + this.props.tweetData.userScreenName}</span>
+                            </a>
+                        </div>
+                        <div className={"tweetText"}>
+                            {renderedString}
+                        </div>
+                        <div className={"tweetFooter"}></div>
+                    </div>
+                </div>
+            </div>
         )}
 }
 

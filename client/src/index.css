@@ -1,18 +1,175 @@
+/*
+I DO NOT OWN THIS FONT THIS IS A REALLY HACK WAY OF GETTING IT
+bad, bad, bad.
+Don't ever do this
+All rights for Segoe UI go to microsoft.
+This project is for educational purposes only
+*/
+@font-face {
+    font-family: 'Segoe UI';
+    src: url('/surface/Assets/css/fonts/all/normal/segoeui.eot');
+    src: url('/surface/Assets/css/fonts/all/normal/segoeui.eot?#iefix') format('embedded-opentype'),
+         url('/surface/Assets/css/fonts/all/normal/segoeui.svg#SegoeUI') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  background-color: #e6ecf1;
 }
 
-.tweet {
-    white-space: pre-wrap;
+a {
+    text-decoration: none;
 }
-.grammarText {
-    background-color: yellow;
+
+.tweetTimeline {
+    color: rgb(20, 23, 26);
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 19.25px;
+    text-align: left;
+    display: block;
+    position: relative;
+    width: 90%;
+    max-width: 590px;
+    margin-top: 10vh;
+    margin-left: auto;
+    margin-right: auto;
 }
-.styleText {
-    background-color: lightblue;
+
+.tweetWrapper {
+    background-color: rgb(255, 255, 255);
+    border-left: 1px solid rgb(230, 236, 240);
+    border-right: 1px solid rgb(230, 236, 240);
+    display: block;
+    position: relative;
+    margin: 0;
 }
-.spellingText {
-    background-color: pink;
-}
+
+    .tweetOuterContent {
+        border-bottom: 1px solid rgb(230, 236, 240);
+        cursor: pointer;
+        display: block;
+        min-height: 51px;
+        padding: 9px 12px 9px 12px;
+        position: relative;
+    }
+    .tweetOuterContent:hover {
+        background-color: rgb(245, 248, 250);
+    }
+
+        .tweetContent {
+            margin-left: 58px;
+            display: block;
+        }
+            .tweetHeader {
+                display: flex;
+            }
+                .accountGroup {
+                    cursor: auto;
+                    display: flex;
+                    flex-shrink: 1;
+                    margin-right: 5px;
+                    overflow: hidden;
+                    text-decoration: none;
+                    color: rgb(20, 23, 26);
+                }
+                .accountGroup:hover .accountName {
+                    color: rgb(0, 172, 237);
+                    text-decoration: underline;
+                }
+                    .accountPicture {
+                        border-radius: 50%;
+                        border: 0px solid rgb(20, 23, 26);
+                        float: none;
+                        height: 48px;
+                        list-style-image: none;
+                        list-style-position: outside;
+                        list-style-type: none;
+                        margin-left: -58px;
+                        margin-top: 3px;
+                        position: absolute;
+                        width: 48px;
+                    }
+                    .accountName {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        word-wrap: normal;
+                        font-weight: 700;
+                        word-break: break-all;
+                        padding-right: 3px;
+                    }
+                    .accountUsername {
+                        color: rgb(101, 119, 134);
+                        text-decoration: none;
+                    }
+            .tweetText {
+                white-space: pre-wrap;
+                word-wrap: break-word;
+                color: rgb(20, 23, 26);
+                font-size: 14px;
+                line-height: 20px;
+                font-weight: 400;
+                margin: 0;
+            }
+                .tweetLink {
+                    text-decoration: none;
+                    color: rgb(0, 172, 237);
+                    font-weight: 400;
+                }
+                .tweetLink:hover {
+                    text-decoration-line: underline;
+                }
+                .grammarText {
+                    background-color: yellow;
+                }
+                .styleText {
+                    background-color: lightblue;
+                }
+                .spellingText {
+                    background-color: pink;
+                }
+                .tooltip {
+                    display: inline;
+                    position: relative;
+                }
+                .tooltip:hover {
+                    border-bottom: 1px solid yellow;
+                }
+                .tooltip:hover:after {
+                    background: #111;
+                    background: rgba(0,0,0,0.8);
+                    border-radius: 0.5em;
+                    bottom: 1.35em;
+                    color: #fff;
+                    content: attr(title);
+                    display: block;
+                    padding: 0.5em 1em;
+                    left: calc(50% - 150px);
+                    width: 300px;
+                    position: absolute;
+                    text-shadow: 0 1px 0 #000;
+                    z-index: 98;
+                }
+                .tooltip:hover:before {
+                    border: solid;
+                    border-color: #111 transparent;
+                    border-color: rgba(0,0,0,.8) transparent;
+                    border-width: .4em .4em 0 .4em;
+                    bottom: 1em;
+                    content: "";
+                    display: block;
+                    left: calc(50% - .4em);
+                    position: absolute;
+                    z-index: 99;
+                }
+
+            .tweetFooter {
+                display: block;
+                width: 500px;
+                height: 20px;
+            }

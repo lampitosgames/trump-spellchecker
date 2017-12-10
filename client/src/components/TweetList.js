@@ -13,7 +13,7 @@ class TweetList extends Component {
             <Tweet key={tweet.id} tweetData={tweet}/>
         );
         return (
-            <div>
+            <div className={"tweetTimeline"}>
                 {renderTweets}
             </div>
         )
