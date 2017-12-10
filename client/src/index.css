@@ -146,10 +146,10 @@ a {
                     display: inline;
                     position: relative;
                 }
-                .tooltip:hover {
+                .tooltip:hover, .tooltip:active {
                     border-bottom: 1px solid yellow;
                 }
-                .tooltip:hover:after {
+                .tooltip:hover:after, .tooltip:active:after {
                     background: #111;
                     background: rgba(0,0,0,0.8);
                     border-radius: 0.5em;
@@ -164,7 +164,7 @@ a {
                     text-shadow: 0 1px 0 #000;
                     z-index: 98;
                 }
-                .tooltip:hover:before {
+                .tooltip:hover:before, .tooltip:active:before {
                     border: solid;
                     border-color: #111 transparent;
                     border-color: rgba(0,0,0,.8) transparent;
