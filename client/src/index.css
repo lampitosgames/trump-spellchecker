@@ -29,7 +29,7 @@ body {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 .tweetTimeline {
@@ -92,6 +92,9 @@ a {
                     color: rgb(0, 172, 237);
                     text-decoration: underline;
                 }
+                .accountGroup:hover .accountUsername {
+                    text-decoration-line: none;
+                }
                     .accountPicture {
                         border-radius: 50%;
                         border: 0px solid rgb(20, 23, 26);
@@ -136,51 +139,91 @@ a {
                     text-decoration-line: underline;
                 }
                 .grammarText {
-                    background-color: yellow;
-                }
-                .styleText {
-                    background-color: lightblue;
-                }
-                .spellingText {
-                    background-color: pink;
-                }
-                .tooltip {
                     display: inline;
                     position: relative;
+                    background-color: rgba(255, 231, 76, 0.65);
+                    border-top-right-radius: 2px;
+                    border-top-left-radius: 2px;
+                    border-bottom: 2px solid rgba(234, 212, 70, 1.0);
+                    padding-left: 3px;
+                    padding-right: 3px;
                 }
-                .tooltip:hover, .tooltip:active {
-                    border-bottom: 1px solid yellow;
+                .styleText {
+                    display: inline;
+                    position: relative;
+                    background-color: rgba(73, 189, 255, 0.5);
+                    border-top-right-radius: 2px;
+                    border-top-left-radius: 2px;
+                    border-bottom: 2px solid rgba(73, 189, 255, 1.0);
+                    padding-left: 3px;
+                    padding-right: 3px;
                 }
-                .tooltip:hover:after, .tooltip:active:after {
-                    background: #111;
-                    background: rgba(0,0,0,0.8);
-                    border-radius: 0.5em;
-                    bottom: 1.35em;
-                    color: #fff;
-                    content: attr(title);
-                    display: block;
-                    padding: 0.5em 1em;
-                    left: calc(50% - 150px);
-                    width: 300px;
-                    position: absolute;
-                    text-shadow: 0 1px 0 #000;
-                    z-index: 98;
+                .spellingText {
+                    display: inline;
+                    position: relative;
+                    background-color: rgba(255, 89, 100, 0.5);
+                    border-top-right-radius: 2px;
+                    border-top-left-radius: 2px;
+                    border-bottom: 2px solid rgba(255, 89, 100, 1.0);
+                    padding-left: 3px;
+                    padding-right: 3px;
                 }
-                .tooltip:hover:before, .tooltip:active:before {
-                    border: solid;
-                    border-color: #111 transparent;
-                    border-color: rgba(0,0,0,.8) transparent;
-                    border-width: .4em .4em 0 .4em;
-                    bottom: 1em;
-                    content: "";
-                    display: block;
-                    left: calc(50% - .4em);
-                    position: absolute;
-                    z-index: 99;
-                }
-
             .tweetFooter {
                 display: block;
-                /*width: 500px;*/
                 height: 20px;
             }
+
+/* Custom Popover Styles */
+.popover-title {
+    font-weight: 700;
+}
+    /* Grammar errors */
+    #popoverGrammar {
+        background-color: rgba(255, 240, 140, 1.0);
+        border: 0px;
+        padding: 0px;
+    }
+    #popoverGrammar .arrow:after {
+        border-top-color: rgba(255, 240, 140, 1.0);
+    }
+    #popoverGrammar .arrow {
+        border-top-color: rgba(255, 231, 76, 1.0);
+    }
+    #popoverGrammar .popover-title {
+        background-color: rgba(255, 231, 76, 1.0);
+        border: 0px;
+    }
+
+    /* Spelling errors */
+    #popoverSpelling {
+        background-color: rgba(255, 174, 178, 1.0);
+        border: 0px;
+        padding: 0px;
+    }
+    #popoverSpelling .arrow:after {
+        border-top-color: rgba(255, 174, 178, 1.0);
+    }
+    #popoverSpelling .arrow {
+        border-top-color: rgba(255, 143, 150, 1.0);
+    }
+    #popoverSpelling .popover-title {
+        background-color: rgba(255, 143, 150, 1.0);
+        border: 0px;
+    }
+
+    /* Style errors */
+    #popoverStyle {
+        background-color: rgba(165, 222, 255, 1.0);
+        border: 0px;
+        padding: 0px;
+    }
+    #popoverStyle .arrow:after {
+        border-top-color: rgba(165, 222, 255, 1.0);
+    }
+    #popoverStyle .arrow {
+        border-top-color: rgba(112, 203, 255, 1.0);
+    }
+    #popoverStyle .popover-title {
+        background-color: rgba(112, 203, 255, 1.0);
+        border-bottom: 0px;
+    }

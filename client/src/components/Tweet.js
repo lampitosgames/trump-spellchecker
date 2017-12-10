@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import moment from 'moment';
 
 import PlainText from './tweetComponents/plainText';
 import TwitterLink from './tweetComponents/twitterLink';
@@ -26,7 +25,7 @@ class Tweet extends Component {
                     <div className={"tweetContent"}>
                         <div className={"tweetHeader"}>
                             <a className={"accountGroup"} href={"https://twitter.com/" + this.props.tweetData.userScreenName} target="_blank">
-                                <img src={this.props.tweetData.userImageLink} className={"accountPicture"} />
+                                <img src={this.props.tweetData.userImageLink} alt={"Account"} className={"accountPicture"} />
                                 <span className={"accountName"}>{this.props.tweetData.userRealName}</span>
                                 <span className={"accountUsername"}>{"@" + this.props.tweetData.userScreenName}</span>
                             </a>
