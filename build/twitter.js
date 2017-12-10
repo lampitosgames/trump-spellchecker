@@ -21,7 +21,7 @@ var getRecentTweets = exports.getRecentTweets = function getRecentTweets(usernam
     return new Promise(function (resolve, reject) {
         client.get('statuses/user_timeline', {
             screen_name: username,
-            count: 10,
+            count: 25,
             exclude_replies: true,
             include_rts: true,
             tweet_mode: "extended"
