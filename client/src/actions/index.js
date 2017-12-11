@@ -1,5 +1,6 @@
 import actionTypes from './actionTypes';
 
+//SETTINGS
 export const switchView = (newViewType) => {
     return {
         type: actionTypes.SWITCH_VIEW,
@@ -14,6 +15,8 @@ export const listenToNewUser = (newUser) => {
     }
 }
 
+
+//TWEETS
 export const newTweet = (tweetData) => {
     return {
         type: actionTypes.NEW_TWEET,
@@ -26,4 +29,13 @@ export const multipleNewTweets = (tweets) => {
         type: actionTypes.NEW_TWEET_LIST,
         tweets: tweets
     };
+}
+
+
+//SOCKET STATUS
+export const updateSocketStatus = (newStatus) => {
+    return {
+        type: actionTypes.UPDATE_SOCKET_STATUS,
+        status: newStatus
+    }
 }

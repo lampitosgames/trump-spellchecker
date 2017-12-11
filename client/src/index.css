@@ -106,6 +106,47 @@ a {
             height: 4px;
         }
 
+.socketStatusWrapper {
+    position: fixed;
+    display: flex;
+    width: 100%;
+    padding: 7px 15px 7px 15px;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: 999;
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 400;
+    background-color: rgb(255, 255, 255);
+    bottom: 0px;
+    border-top: 1px solid rgb(230, 236, 240);
+}
+@media (min-width: 1024px) {
+    .socketStatusWrapper {
+        max-width: 590px;
+    }
+}
+    .socketStatusIndicator {
+        position: relative;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        margin-left: 10px;
+    }
+    #socketConnected {
+        background-color: rgba(92, 231, 99, 1.0);
+        border: 2px solid rgba(79, 198, 85, 1.0);
+    }
+    #socketConnecting {
+        background-color: rgba(255, 240, 140, 1.0);
+        border: 2px solid rgba(255, 231, 76, 1.0);
+    }
+    #socketDisconnected {
+        background-color: rgba(255, 174, 178, 1.0);
+        border: 2px solid rgba(255, 143, 150, 1.0);
+    }
+
 
 .tweetTimeline {
     color: rgb(20, 23, 26);
@@ -118,6 +159,7 @@ a {
     position: relative;
     width: 100%;
     min-height: 100vh;
+    padding-bottom: 31px;
     margin-left: auto;
     margin-right: 0;
 }
