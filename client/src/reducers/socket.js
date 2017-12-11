@@ -32,7 +32,7 @@ const settings = (state = initialState, action) => {
                 listeningTo: [
                     ...action.userList
                 ]
-            }
+            };
         default:
             return state;
     }

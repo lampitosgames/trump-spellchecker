@@ -7,11 +7,8 @@ export default (store) => {
 
     store.dispatch(addClientSocket(socket));
 
+    //Listen to donald trump initially
     socket.emit('listenToUser', "realDonaldTrump");
-    // socket.emit('listenToUser', "lampitosgames");
-    // socket.emit('listenToUser', "elonmusk");
-
-    // setTimeout(() => socket.emit('listenToUser', "lampitosgames"), 3000);
 
     socket.on('newTweet', (tweet) => {
         store.dispatch(newTweet(tweet));

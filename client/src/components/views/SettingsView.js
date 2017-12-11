@@ -30,6 +30,12 @@ class SettingsView extends Component {
         this.setState({value: e.target.value});
     }
 
+    handleKeyPress(e) {
+        if (e.key === 'Enter') {
+            this.handleSubmit(null);
+        }
+    }
+
     handleSubmit(e) {
         this.props.listenToNewUsers(this.state.value);
     }
@@ -41,6 +47,7 @@ class SettingsView extends Component {
                 <div id={"listeningTo"} className={"settingFormWrapper"}>
                     <FormControl
                         type="text"
+                        onKeyPress={this.handleKeyPress.bind(this)}
                         bsClass="form-control input-sm textBox"
                         value={this.state.value}
                         placeholder="realDonaldTrump"
@@ -48,13 +55,14 @@ class SettingsView extends Component {
                     />
                     <Button
                         bsClass="btn btn-sm btn-primary applyButton"
-                        onClick={this.handleSubmit.bind(this)}
+                        disabled={this.props.isLoading}
+                        onClick={this.props.isLoading ? null : this.handleSubmit.bind(this)}
                     >
-                        Apply Changes
+                        {this.props.isLoading ? "Working..." : "Apply Changes"}
                     </Button>
                 </div>
                 <div className={"settingFormDescription"}>
-                    <em>Comma seperated list of users to listen to.</em>
+                    <em>Comma seperated list of users to listen to</em>
                     <br></br>
                     <em>Note: this is unstable due to API throttles.  It might throw a lot of errors</em>
                 </div>
@@ -65,7 +73,8 @@ class SettingsView extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        listeningTo: state.socket.listeningTo
+        listeningTo: state.socket.listeningTo,
+        isLoading: !state.socket.changedListeningSuccessfully
     };
 }
 const mapDispatchToProps = (dispatch) => {

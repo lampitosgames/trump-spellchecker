@@ -1,19 +1,5 @@
 import {listenWasSuccessful, multipleNewTweets} from '../actions';
 
-const tweetMiddleware = store => next => action => {
-    if (action.type === 'INCREMENT') {
-        console.log("increment");
-    }
-    next(action);
-}
-
-const tweetMiddlewareTwo = store => next => action => {
-    if (action.type === 'DECREMENT') {
-        console.log("decrement");
-    }
-    next(action);
-}
-
 const listenToNewUserMiddleware = store => next => action => {
     if (action.type === 'LISTEN_TO_NEW_USERS') {
         //Get the socket from the store
@@ -27,15 +13,15 @@ const listenToNewUserMiddleware = store => next => action => {
         //Else, we aren't going to listen to anyone.
         } else {
             //Emit two new actions to reset the state, passing in blank arrays
+            next(action);
             next(multipleNewTweets([]));
             next(listenWasSuccessful([]));
+            return;
         }
     }
     next(action);
 }
 
 export default [
-    tweetMiddleware,
-    tweetMiddlewareTwo,
     listenToNewUserMiddleware
 ]
