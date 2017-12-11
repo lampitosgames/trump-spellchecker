@@ -1,11 +1,15 @@
 import io from 'socket.io-client';
-import { newTweet, multipleNewTweets, updateSocketStatus, throwError, removeError } from './actions';
+import { newTweet, multipleNewTweets, addClientSocket, updateSocketStatus, throwError, removeError } from './actions';
 import connectionTypes from './actions/connectionTypes';
 
 export default (store) => {
     const socket = io();
 
+    store.dispatch(addClientSocket(socket));
+
     socket.emit('listenToUser', "realDonaldTrump");
+    // socket.emit('listenToUser', "lampitosgames");
+    // socket.emit('listenToUser', "elonmusk");
 
     // setTimeout(() => socket.emit('listenToUser', "lampitosgames"), 3000);
 

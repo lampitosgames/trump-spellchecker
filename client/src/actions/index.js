@@ -32,11 +32,24 @@ export const multipleNewTweets = (tweets) => {
 }
 
 
-//SOCKET STATUS
+//SOCKETS
+export const addClientSocket = (socket) => {
+    return {
+        type: actionTypes.ADD_CLIENT_SOCKET,
+        socket: socket
+    };
+}
 export const updateSocketStatus = (newStatus) => {
     return {
         type: actionTypes.UPDATE_SOCKET_STATUS,
         status: newStatus
+    };
+}
+export const listenToNewUsers = (userList) => {
+    let userArray = userList.split(", ");
+    return {
+        type: actionTypes.LISTEN_TO_NEW_USERS,
+        userList: userArray
     };
 }
 

@@ -10,7 +10,7 @@ const error = (state = initialState, action) => {
             return {
                 ...state,
                 errorList: [
-                    ...state.errorList.filter((err) => (err.context != action.error.context)),
+                    ...state.errorList.filter((err) => (err.context !== action.error.context)),
                     action.error
                 ]
             };

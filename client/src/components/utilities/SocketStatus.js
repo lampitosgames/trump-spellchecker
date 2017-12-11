@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import connectionTypes from '../actions/connectionTypes';
+import connectionTypes from '../../actions/connectionTypes';
 
 class SocketStatus extends Component {
   render() {

@@ -4,9 +4,11 @@ import {connect} from 'react-redux';
 import viewTypes from '../actions/viewTypes';
 
 import TweetHeader from './TweetHeader';
-import TweetView from './TweetView';
-import SocketStatus from './SocketStatus';
-import ErrorList from './ErrorList';
+import TweetView from './views/TweetView';
+import AboutView from './views/AboutView';
+import SettingsView from './views/SettingsView';
+import SocketStatus from './utilities/SocketStatus';
+import ErrorList from './utilities/ErrorList';
 
 
 class TweetTimeline extends Component {
@@ -14,9 +16,11 @@ class TweetTimeline extends Component {
         //Select the view based on state
         let renderedView;
         if (this.props.currentView === viewTypes.TWEETS_VIEW) {
-            renderedView = <TweetView/>;
+            renderedView = <TweetView />;
+        } else if (this.props.currentView === viewTypes.ABOUT_VIEW) {
+            renderedView = <AboutView />;
         } else if (this.props.currentView === viewTypes.SETTINGS_VIEW) {
-            renderedView = <div>test</div>;
+            renderedView = <SettingsView />;
         }
         return (
             <div className={"tweetTimeline"}>

@@ -3,10 +3,11 @@ import {connect} from 'react-redux';
 
 class ErrorList extends Component {
     render() {
+        let iterator = 0;
         //Generate error elements array
         let errorElements = this.props.errors.map((error) => {
             return (
-                <div className="errorWrapper">
+                <div key={iterator++} className="errorWrapper">
                     <div className="errorTitle">Error: {error.context}</div>
                     {(typeof error.message === "string")
                         ? <div className="errorDescription">{error.message}</div>
