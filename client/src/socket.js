@@ -6,8 +6,6 @@ export default (store) => {
     const socket = io();
 
     socket.emit('listenToUser', "realDonaldTrump");
-    socket.emit('listenToUser', "lampitosgames");
-    socket.emit('listenToUser', "elonmusk");
 
     // setTimeout(() => socket.emit('listenToUser', "lampitosgames"), 3000);
 
