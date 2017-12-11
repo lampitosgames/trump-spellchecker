@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import Tweet from './Tweet.js';
 
-class TweetList extends Component {
+class TweetView extends Component {
     render() {
         let renderTweets = this.props.tweets.sort((a, b) => {
             let dateA = Date.parse(a.timestamp);
@@ -13,7 +13,7 @@ class TweetList extends Component {
             <Tweet key={tweet.id} tweetData={tweet}/>
         );
         return (
-            <div className={"tweetTimeline"}>
+            <div className={"tweetView"}>
                 {renderTweets}
             </div>
         )
@@ -24,4 +24,4 @@ const mapStateToProps = (state) => {
     return {tweets: state.tweets.tweets};
 }
 
-export default connect(mapStateToProps)(TweetList);
+export default connect(mapStateToProps)(TweetView);

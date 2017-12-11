@@ -1,17 +1,6 @@
 import React from 'react';
-import {Popover, OverlayTrigger} from 'react-bootstrap';
-
-const CorrectionPopover = (fragment) => {
-    let popoverID = fragment.type === 'GRAMMAR_MISTAKE' ? "popoverGrammar" : "";
-    popoverID += fragment.type === 'SPELLING_MISTAKE' ? "popoverSpelling" : "";
-    popoverID += fragment.type === 'STYLE_MISTAKE' ? "popoverStyle" : "";
-
-    return (
-        <Popover id={popoverID} title={fragment.message}>
-            {fragment.fullMessage}
-        </Popover>
-    )
-}
+import {OverlayTrigger} from 'react-bootstrap';
+import CorrectionPopover from './correctionPopover';
 
 const GrammarText = ({fragment}) => {
     let popoverElement = CorrectionPopover(fragment);

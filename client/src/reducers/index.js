@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import tweets from './tweets';
+import settings from './settings';
 
 const spellcheckApp = combineReducers({
-    tweets
+    tweets,
+    settings
 });
 
 export default spellcheckApp;

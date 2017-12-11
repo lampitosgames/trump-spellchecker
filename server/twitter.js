@@ -10,7 +10,7 @@ export const getRecentTweets = (username) => {
     return new Promise((resolve, reject) => {
         client.get('statuses/user_timeline', {
             screen_name: username,
-            count: 25,
+            count: 10,
             exclude_replies: true,
             include_rts: true,
             tweet_mode: "extended"

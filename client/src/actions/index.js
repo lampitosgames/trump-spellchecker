@@ -1,14 +1,16 @@
 import actionTypes from './actionTypes';
 
-export const incrementCounter = () => {
+export const switchView = (newViewType) => {
     return {
-        type: actionTypes.INCREMENT
-    }
+        type: actionTypes.SWITCH_VIEW,
+        newView: newViewType
+    };
 }
 
-export const decrementCounter = () => {
+export const listenToNewUser = (newUser) => {
     return {
-        type: actionTypes.DECREMENT
+        type: actionTypes.LISTEN_TO_NEW_USER,
+        newUser: newUser
     }
 }
 

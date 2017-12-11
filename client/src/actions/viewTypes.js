@@ -1,0 +1,5 @@
+export default {
+    TWEETS_VIEW: 'TWEETS_VIEW',
+    ABOUT_VIEW: 'ABOUT_VIEW',
+    SETTINGS_VIEW: 'SETTINGS_VIEW'
+}
