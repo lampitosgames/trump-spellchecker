@@ -95,6 +95,7 @@ var TwitterUser = exports.TwitterUser = function () {
         this.listeners = [];
         //Retry timeout for connecting to a tweet stream
         this.retryTimeoutStarted = false;
+        this.connectionTries = 0;
 
         this.FetchTweets().Listen();
     }
@@ -119,11 +120,11 @@ var TwitterUser = exports.TwitterUser = function () {
                             TweetState.clients[cli.clientID].EmitRecentTweets();
                         });
                     }).catch(function (err) {
-                        return _this.HandleError("Error spellchecking tweet " + thisTweet.text, err);
+                        return _this.HandleError("Error spellchecking tweet " + thisTweet.text, { source: "Exceeded maximum number of calls to the language API" });
                     });
                 });
             }).catch(function (err) {
-                return _this.HandleError("Error getting recent tweets", err);
+                return _this.HandleError("Error getting recent tweets for " + _this.username, err);
             });
             return this;
         }
@@ -160,8 +161,10 @@ var TwitterUser = exports.TwitterUser = function () {
 
                 tweetStream.on('error', function (err) {
                     _this2.HandleError("Couldn't get tweet stream for " + _this2.username, err);
-                    if (!curUser.retryTimeoutStarted) {
+                    console.dir(JSON.stringify(err));
+                    if (!curUser.retryTimeoutStarted && curUser.connectionTries < 4) {
                         curUser.retryTimeoutStarted = true;
+                        curUser.connectionTries++;
                         setTimeout(function () {
                             curUser.FetchTweets.bind(curUser)();
                             curUser.Listen.bind(curUser)();
@@ -170,7 +173,7 @@ var TwitterUser = exports.TwitterUser = function () {
                     }
                 });
             }).catch(function (err) {
-                _this2.HandleError("Couldn't get tweet stream for " + _this2.username, err);
+                // this.HandleError("Couldn't get tweet stream for " + this.username, err);
             });
 
             return this;
@@ -208,6 +211,14 @@ var TwitterUser = exports.TwitterUser = function () {
         value: function HandleError(context, error) {
             console.log(context);
             console.error(error);
+            var errorObject = {
+                context: context,
+                message: error.source != undefined ? error.source : error
+            };
+            //Emit the error to relevant clients
+            this.listeners.forEach(function (cli) {
+                return cli.emit('serverError', errorObject);
+            });
         }
     }]);
 
