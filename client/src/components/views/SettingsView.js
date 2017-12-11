@@ -1,13 +1,29 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {listenToNewUsers} from '../../actions';
+
 import {FormControl, Button} from 'react-bootstrap';
 
 class SettingsView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: 'realDonaldTrump'
+            value: this.getFormattedUserlist(props.listeningTo)
         }
+    }
+
+    getFormattedUserlist(userList) {
+        let formattedUserList = userList.length > 0 ? userList[0] : "";
+        for (let i=1; i<userList.length; i++) {
+            formattedUserList += ", " + userList[i];
+        }
+        return formattedUserList;
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            value: this.getFormattedUserlist(nextProps.listeningTo)
+        });
     }
 
     handleChange(e) {
@@ -15,7 +31,7 @@ class SettingsView extends Component {
     }
 
     handleSubmit(e) {
-
+        this.props.listenToNewUsers(this.state.value);
     }
 
     render() {
@@ -48,7 +64,16 @@ class SettingsView extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {tweets: state.tweets.tweets};
+    return {
+        listeningTo: state.socket.listeningTo
+    };
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        listenToNewUsers: (users) => {
+            dispatch(listenToNewUsers(users));
+        }
+    };
 }
 
-export default connect(mapStateToProps)(SettingsView);
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsView);

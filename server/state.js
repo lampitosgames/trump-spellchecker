@@ -86,7 +86,14 @@ export class TwitterUser {
                     });
                 }).catch((err) => this.HandleError("Error spellchecking tweet " + thisTweet.text, {source: "Exceeded maximum number of calls to the language API"}));
             });
-        }).catch((err) => this.HandleError("Error getting recent tweets for " + this.username, err));
+        //Error actually fetching tweets
+        }).catch((err) => {
+            this.HandleError("Error getting recent tweets for " + this.username, err);
+            this.listeners.forEach(cli => TweetState.clients[cli.clientID]
+                                            .Ignore(this.username)
+                                            .EmitRecentTweets());
+            delete TweetState.tweets[this.username];
+        });
         return this;
     }
 

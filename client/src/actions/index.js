@@ -46,10 +46,16 @@ export const updateSocketStatus = (newStatus) => {
     };
 }
 export const listenToNewUsers = (userList) => {
-    let userArray = userList.split(", ");
+    let userArray = userList.match(/(\w){3,15}/g);
     return {
         type: actionTypes.LISTEN_TO_NEW_USERS,
         userList: userArray
+    };
+}
+export const listenWasSuccessful = (userList) => {
+    return {
+        type: actionTypes.LISTEN_WAS_SUCCESSFUL,
+        userList: userList
     };
 }
 

@@ -36,10 +36,22 @@ io.on('connection', (socket) => {
     console.log("client connected");
     socket.clientObject = new Client(socket);
 
+    socket.on('ignoreEveryone', (data) => {
+        let userList = TweetState.clients[socket.clientID].listeningTo;
+        userList.forEach(user => {
+            TweetState.clients[socket.clientID].Ignore(user);
+        });
+    });
+
     //When the client asks to listen to a user, pass that to the tweet state
     socket.on('listenToUser', (data) => {
         TweetState.ListenToUser(data, socket);
+        socket.emit('listenSuccessful', TweetState.clients[socket.clientID].listeningTo);
     });
+    socket.on('listenToManyUsers', (data) => {
+        data.forEach(user => TweetState.ListenToUser(user, socket));
+        socket.emit('listenSuccessful', TweetState.clients[socket.clientID].listeningTo);
+    })
     //When the client wants to disconnect from a tweet stream, disconnect them
     socket.on('ignoreUser', (data) => {
         TweetState.IgnoreUser(data, socket);

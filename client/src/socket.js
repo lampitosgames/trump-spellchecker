@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-import { newTweet, multipleNewTweets, addClientSocket, updateSocketStatus, throwError, removeError } from './actions';
+import { newTweet, multipleNewTweets, addClientSocket, updateSocketStatus, listenWasSuccessful, throwError, removeError } from './actions';
 import connectionTypes from './actions/connectionTypes';
 
 export default (store) => {
@@ -20,6 +20,10 @@ export default (store) => {
     socket.on('recentTweets', (tweets) => {
         store.dispatch(multipleNewTweets(tweets));
     });
+
+    socket.on('listenSuccessful', (userList) => {
+        store.dispatch(listenWasSuccessful(userList));
+    })
 
     //Socket connection state handling
     socket.on('connecting', () => {

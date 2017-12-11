@@ -23,11 +23,16 @@ const settings = (state = initialState, action) => {
         case actionTypes.LISTEN_TO_NEW_USERS:
             return {
                 ...state,
+                changedListeningSuccessfully: false
+            };
+        case actionTypes.LISTEN_WAS_SUCCESSFUL:
+            return {
+                ...state,
+                changedListeningSuccessfully: true,
                 listeningTo: [
-                    ...state.listeningTo,
                     ...action.userList
                 ]
-            };
+            }
         default:
             return state;
     }
