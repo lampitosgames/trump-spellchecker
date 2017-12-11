@@ -123,8 +123,13 @@ var TwitterUser = exports.TwitterUser = function () {
                         return _this.HandleError("Error spellchecking tweet " + thisTweet.text, { source: "Exceeded maximum number of calls to the language API" });
                     });
                 });
+                //Error actually fetching tweets
             }).catch(function (err) {
-                return _this.HandleError("Error getting recent tweets for " + _this.username, err);
+                _this.HandleError("Error getting recent tweets for " + _this.username, err);
+                _this.listeners.forEach(function (cli) {
+                    return TweetState.clients[cli.clientID].Ignore(_this.username).EmitRecentTweets();
+                });
+                delete TweetState.tweets[_this.username];
             });
             return this;
         }
