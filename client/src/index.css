@@ -20,16 +20,23 @@ body {
   padding: 0;
   width: 100vw;
   height: 100vh;
-  overflow-x: hidden;
-  background-image: url("./assets/trumpBackground.jpg");
-  background-position: bottom;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
+}
+@media (min-width: 1024px) {
+    body {
+        background-image: url("./assets/trumpBackground.jpg");
+        background-position: bottom;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 }
 
 a {
     text-decoration: none !important;
+}
+
+.root, .app, body {
+    overflow-x: hidden;
 }
 
 .timelineHeader {
@@ -346,3 +353,34 @@ a {
         background-color: rgba(112, 203, 255, 1.0);
         border-bottom: 0px;
     }
+
+.errorBox {
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 400;
+    bottom: 31px;
+}
+@media (min-width: 1024px) {
+    .errorBox {
+        max-width: 590px;
+    }
+}
+    .errorWrapper {
+        position: relative;
+        display: block;
+        width: 100%;
+        background-color: rgba(255, 174, 178, 0.8);
+    }
+        .errorTitle {
+            padding: 5px;
+            display: block;
+            font-weight: 500;
+            width: 100%;
+            background-color: rgba(255, 143, 150, 0.8);
+        }
+        .errorDescription {
+            padding: 3px 5px 5px 5px;
+        }

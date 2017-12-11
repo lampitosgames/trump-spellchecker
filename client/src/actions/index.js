@@ -37,5 +37,19 @@ export const updateSocketStatus = (newStatus) => {
     return {
         type: actionTypes.UPDATE_SOCKET_STATUS,
         status: newStatus
-    }
+    };
+}
+
+//ERRORS
+export const throwError = (error) => {
+    return {
+        type: actionTypes.THROW_ERROR,
+        error: error
+    };
+}
+export const removeError = (error) => {
+    return {
+        type: actionTypes.REMOVE_ERROR,
+        error: error
+    };
 }

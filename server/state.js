@@ -64,6 +64,7 @@ export class TwitterUser {
         this.listeners = [];
         //Retry timeout for connecting to a tweet stream
         this.retryTimeoutStarted = false;
+        this.connectionTries = 0;
 
         this.FetchTweets().Listen();
     }
@@ -83,9 +84,9 @@ export class TwitterUser {
                     this.listeners.forEach(cli => {
                         TweetState.clients[cli.clientID].EmitRecentTweets()
                     });
-                }).catch((err) => this.HandleError("Error spellchecking tweet " + thisTweet.text, err));
+                }).catch((err) => this.HandleError("Error spellchecking tweet " + thisTweet.text, {source: "Exceeded maximum number of calls to the language API"}));
             });
-        }).catch((err) => this.HandleError("Error getting recent tweets", err));
+        }).catch((err) => this.HandleError("Error getting recent tweets for " + this.username, err));
         return this;
     }
 
@@ -113,8 +114,10 @@ export class TwitterUser {
 
             tweetStream.on('error', (err) => {
                 this.HandleError("Couldn't get tweet stream for " + this.username, err);
-                if (!curUser.retryTimeoutStarted) {
+                console.dir(JSON.stringify(err));
+                if (!curUser.retryTimeoutStarted && curUser.connectionTries < 4) {
                     curUser.retryTimeoutStarted = true;
+                    curUser.connectionTries++;
                     setTimeout(() => {
                         curUser.FetchTweets.bind(curUser)();
                         curUser.Listen.bind(curUser)();
@@ -123,7 +126,7 @@ export class TwitterUser {
                 }
             });
         }).catch((err) => {
-            this.HandleError("Couldn't get tweet stream for " + this.username, err);
+            // this.HandleError("Couldn't get tweet stream for " + this.username, err);
         });
 
         return this;
@@ -152,6 +155,12 @@ export class TwitterUser {
     HandleError(context, error) {
         console.log(context);
         console.error(error);
+        let errorObject = {
+            context: context,
+            message: (error.source != undefined ? error.source : error)
+        };
+        //Emit the error to relevant clients
+        this.listeners.forEach(cli => cli.emit('serverError', errorObject));
     }
 }
 

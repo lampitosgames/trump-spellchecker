@@ -6,6 +6,7 @@ import viewTypes from '../actions/viewTypes';
 import TweetHeader from './TweetHeader';
 import TweetView from './TweetView';
 import SocketStatus from './SocketStatus';
+import ErrorList from './ErrorList';
 
 
 class TweetTimeline extends Component {
@@ -22,6 +23,7 @@ class TweetTimeline extends Component {
                 <TweetHeader />
                 <SocketStatus />
                 {renderedView}
+                <ErrorList />
             </div>
         )
     }
