@@ -20,21 +20,26 @@ var _router = require('./router');
 
 var _router2 = _interopRequireDefault(_router);
 
-var _tweetObject = require('./tweetObject');
+var _state = require('./state');
 
-var _tweetObject2 = _interopRequireDefault(_tweetObject);
-
-var _twitter = require('./twitter');
-
-var _languageTool = require('./languageTool');
+var _state2 = _interopRequireDefault(_state);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//Load environment variables if in production
+//Needed for twitter API keys.  We don't want to store sensitive info on a public
+//git repo
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').load();
 }
 
-//Select the port from an environment variable or default to 8000
+//Import tweet state.  This internally handles all of the networking and tweet streams
+
+//Custom express router
+//Node modules
+
+
+//Select the port from an environment variable or default to 5000
 //This is needed for Heroku
 var port = process.env.PORT || 5000;
 
@@ -48,67 +53,26 @@ var io = _socket2.default.listen(server);
 //Hook in the app router
 app.use(_router2.default);
 
-//Store recent tweets by a user
-var recentTweets = [];
-
 //On a new connection
 io.on('connection', function (socket) {
-    console.log("connected");
-    socket.emit('recentTweets', recentTweets.map(function (tweet) {
-        return tweet.getData();
-    }));
+    //Log the new connection
+    console.log("client connected");
+    socket.clientObject = new _state.Client(socket);
+
+    //When the client asks to listen to a user, pass that to the tweet state
+    socket.on('listenToUser', function (data) {
+        _state2.default.ListenToUser(data, socket);
+    });
+    //When the client wants to disconnect from a tweet stream, disconnect them
+    socket.on('ignoreUser', function (data) {
+        _state2.default.IgnoreUser(data, socket);
+    });
 });
 
 //Start the server listening on this port
 server.listen(port, function () {
     console.log("Server listening on " + server.address().port);
 
-    var listenToUser = 'realDonaldTrump';
-    // let listenToUser = 'lampitosgames';
-
-    (0, _twitter.getRecentTweets)(listenToUser).then(function (oldTweetData) {
-        if (oldTweetData == null) {
-            return;
-        }
-
-        oldTweetData.forEach(function (tweetData) {
-            var thisTweet = new _tweetObject2.default(tweetData);
-            (0, _languageTool.spellcheckText)(thisTweet.text).then(function (checked) {
-                thisTweet.addCheckData(JSON.parse(checked)).build();
-                recentTweets.push(thisTweet);
-            }).catch(function (err) {
-                return console.error(error);
-            });
-        });
-    }).catch(function (err) {
-        return console.log(err);
-    });
-
-    (0, _twitter.listenForTweets)(listenToUser).then(function (tweetStream) {
-        tweetStream.on('data', function (event) {
-            if (event.user.screen_name !== listenToUser) {
-                return;
-            }
-
-            (0, _twitter.getFullTweet)(event.id_str).then(function (tweetData) {
-                var thisTweet = new _tweetObject2.default(tweetData);
-
-                (0, _languageTool.spellcheckText)(thisTweet.text).then(function (checked) {
-                    thisTweet.addCheckData(JSON.parse(checked)).build();
-                    recentTweets.push(thisTweet);
-                    io.emit('newTweet', thisTweet.getData());
-                }).catch(function (err) {
-                    return console.error(err);
-                });
-            }).catch(function (err) {
-                return console.error(err);
-            });
-        });
-
-        tweetStream.on('error', function (err) {
-            console.error(err);
-        });
-    }).catch(function (err) {
-        return console.error(err);
-    });
+    //Listen to and cache tweets from these users by default
+    var donaldTrump = new _state.TwitterUser("realDonaldTrump");
 });

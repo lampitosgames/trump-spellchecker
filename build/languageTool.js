@@ -13,6 +13,10 @@ var _querystring = require('querystring');
 
 var _querystring2 = _interopRequireDefault(_querystring);
 
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var createPostData = exports.createPostData = function createPostData(dataObject) {
@@ -23,6 +27,8 @@ var createPostData = exports.createPostData = function createPostData(dataObject
  * Helper function that creates HTTP request POST options based
  * on input
  */
+
+//TODO: Throttle requests
 var createPostOptions = exports.createPostOptions = function createPostOptions(_hostname, _path, _postData) {
     return {
         hostname: _hostname,
