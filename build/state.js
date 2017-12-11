@@ -21,6 +21,8 @@ var _languageTool = require('./languageTool');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Client = exports.Client = function () {
@@ -44,10 +46,8 @@ var Client = exports.Client = function () {
                 if (TweetState.tweets[user] == undefined) {
                     return;
                 }
-                recentTweets.push(TweetState.tweets[user].tweetList);
+                recentTweets = [].concat(_toConsumableArray(recentTweets), _toConsumableArray(TweetState.tweets[user].tweetList));
             });
-            //Concat all tweet arrays
-            recentTweets = Array.concat.apply([], recentTweets);
             //Emit all recent tweets
             this.socket.emit('recentTweets', recentTweets.map(function (tweet) {
                 return tweet.getData();

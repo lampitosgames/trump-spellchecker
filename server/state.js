@@ -22,10 +22,11 @@ export class Client {
             if (TweetState.tweets[user] == undefined) {
                 return;
             }
-            recentTweets.push(TweetState.tweets[user].tweetList);
+            recentTweets = [
+                ...recentTweets,
+                ...TweetState.tweets[user].tweetList
+            ];
         });
-        //Concat all tweet arrays
-        recentTweets = Array.concat.apply([], recentTweets);
         //Emit all recent tweets
         this.socket.emit('recentTweets', recentTweets.map(tweet => tweet.getData()));
         return this;
