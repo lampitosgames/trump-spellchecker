@@ -359,9 +359,18 @@ a:hover {
             }
 
 /* Custom Popover Styles */
+.popover-content {
+    padding: 5px;
+}
 .popover-title {
     font-weight: 700;
+    font-size: 16pt;
+    padding: 5px;
 }
+    .fade {
+        opacity: 1.0;
+        transition: none;
+    }
     /* Grammar errors */
     #popoverGrammar {
         background-color: rgba(255, 240, 140, 1.0);
