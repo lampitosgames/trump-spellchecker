@@ -34,9 +34,9 @@
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
-    "babel-preset-env": "^1.6.1",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.16.0",
-    "nodemon": "^1.12.1",
-    "concurrently": "^3.5.1"
+    "concurrently": "^3.5.1",
+    "nodemon": "^1.18.10"
   }
 }
